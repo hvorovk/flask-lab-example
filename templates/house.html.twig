@@ -1,0 +1,48 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Главная{% endblock %}
+{% block content %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top " style="background-color: #009688;" >
+      <div class="container">
+        <a class="navbar-brand" href="/">Рожки&Ножки</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Список домов<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/comp">Жалобы</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/req">Обращения к специалистам</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">О нас</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+    <!-- Page Heading -->
+    <h1 class="my-4">{{ house.name }}</h1>
+        <div class="row justify-content-md-center">
+            <div class="col-12 col-md-auto">
+                {% if house.photo is empty %}
+                    <img class="img-radius" style="width: 500px; height: 286px;" src="{{ asset("img/placeholder.jpg") }}">
+                {% else %}
+                    <img class="img-radius" style="width: 500px; height: 286px;" src="{{ asset(house.photo) }}">
+                {% endif %}
+            </div>
+            <div class="col col-lg-2">
+                {{house.descr}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

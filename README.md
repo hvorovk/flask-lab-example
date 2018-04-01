@@ -123,6 +123,7 @@ flask-sqlacodegen --flask --outfile models.py mysql+pymysql://user-name:password
 В нем необходимо написать:
 
 ```python
+from flask import render_template
 from flask import Flask
 app = Flask(__name__)
 
@@ -130,13 +131,13 @@ app = Flask(__name__)
 @app.route('/index')
 def index():
     user = {'username': 'name'}
-    return render_template('templates/index.html', title='Home', user=user)
+    return render_template('index.html', title='Home', user=user)
 
 if __name__ == "__main__":
     app.run()
 ```
 
-8. Создадим прстой шаблон
+8. Создадим прстой шаблон в папку templates
 
 ```jinja
 <html>

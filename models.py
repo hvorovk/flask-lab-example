@@ -1,11 +1,5 @@
-# coding: utf-8
 from sqlalchemy import Column, Date, DateTime, ForeignKey, Index, Integer, SmallInteger, String, Table, Text
-from sqlalchemy.orm import relationship
-from sqlalchemy.schema import FetchedValue
-from flask_sqlalchemy import SQLAlchemy
-
-
-db = SQLAlchemy()
+from base import db
 
 
 class Complaint(db.Model):
@@ -19,6 +13,12 @@ class Complaint(db.Model):
 
     comp_type = db.relationship('TypeComplaint', primaryjoin='Complaint.comp_type_id == TypeComplaint.id', backref='complaints')
     flat = db.relationship('Flat', primaryjoin='Complaint.flat_id == Flat.id', backref='complaints')
+
+    # def __init__(self, t, f, d, c):
+    #     self.comp_type_id = t
+    #     self.flat_id = f
+    #     self.date = d
+    #     self.comment = c
 
 
 class Flat(db.Model):
@@ -70,6 +70,12 @@ class Request(db.Model):
 
     flat = db.relationship('Flat', primaryjoin='Request.flat_id == Flat.id', backref='requests')
     spec = db.relationship('Specialist', primaryjoin='Request.spec_id == Specialist.id', backref='requests')
+
+    def __init__(self, s, f, d, c):
+        self.spec_id = s
+        self.flat_id = f
+        self.date = d
+        self.comment = c
 
 
 class Specialist(db.Model):
