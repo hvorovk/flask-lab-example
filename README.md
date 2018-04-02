@@ -111,6 +111,22 @@ flask-sqlacodegen --flask --outfile models.py mysql+pymysql://user-name:password
 - port      - порт хоста на котором поднят mysql
 - db-schema - нужная база данных
 
+Пример модели:
+
+
+```python
+class Flat(db.Model):
+    __tablename__ = 'Flat'
+    id = db.Column(db.Integer, primary_key=True)
+    size = db.Column(db.Integer, nullable=False)
+    owner_id = db.Column(db.ForeignKey('Owner.id', ondelete='SET NULL', onupdate='CASCADE'), index=True)
+    house_id = db.Column(db.ForeignKey('House.id', ondelete='SET NULL', onupdate='CASCADE'), index=True)
+    num = db.Column(db.Integer, nullable=False)
+
+    house = db.relationship('House', primaryjoin='Flat.house_id == House.id', backref='flats')
+    owner = db.relationship('Owner', primaryjoin='Flat.owner_id == Owner.id', backref='flats')
+```
+
 6. Созадим необходимую структуру:
     
 ```bash
